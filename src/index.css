@@ -3,30 +3,145 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 72px;
   }
 
   body {
-    font-family: 'Barlow', sans-serif;
-    background-color: #0d1f2d;
-    color: #ffffff;
+    font-family: 'Barlow', system-ui, sans-serif;
+    background-color: #efe6d8;
+    color: #0b2433;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: #f5a020;
+    color: #0b2433;
   }
 }
 
-@layer utilities {
-  .font-bebas {
-    font-family: 'Bebas Neue', sans-serif;
+@layer components {
+  /* etiqueta chiquita tipo revista: "CATÁLOGO 01", "LAY DAY" */
+  .kicker {
+    @apply font-condensed text-[11px] font-semibold uppercase tracking-[0.28em];
   }
 
-  .font-condensed {
-    font-family: 'Barlow Condensed', sans-serif;
+  /* botones pill */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-condensed text-sm font-bold uppercase tracking-[0.14em] transition-all duration-200 active:scale-[0.97];
   }
+  .btn-sun {
+    @apply btn bg-sun text-ink shadow-[0_3px_0_#0b2433] hover:-translate-y-0.5 hover:shadow-[0_5px_0_#0b2433];
+  }
+  .btn-ink {
+    @apply btn bg-ink text-paper hover:bg-ink-2;
+  }
+  .btn-ghost {
+    @apply btn border-[1.5px] border-current hover:bg-ink/5;
+  }
+
+  /* costura: línea punteada como pespunte */
+  .seam {
+    background-image: linear-gradient(90deg, currentColor 55%, transparent 0);
+    background-size: 12px 2px;
+    background-repeat: repeat-x;
+    height: 2px;
+  }
+
+  /* grano de papel */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .grain-light::after {
+    mix-blend-mode: screen;
+    opacity: 0.08;
+  }
+}
+
+/* ---------- animaciones ---------- */
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 32s linear infinite;
+}
+.marquee-rev {
+  animation: marquee 40s linear infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+.float {
+  animation: float 7s ease-in-out infinite;
+}
+
+@keyframes drift {
+  to { transform: translateX(-50%); }
+}
+.wave-drift {
+  animation: drift 18s linear infinite;
+}
+.wave-drift-slow {
+  animation: drift 30s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { r: 7; opacity: 0.8; }
+  100% { r: 20; opacity: 0; }
+}
+.hotspot-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spin-slow 22s linear infinite;
+}
+
+/* entrada al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--d, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ticket: bordes troquelados */
+.ticket {
+  --r: 10px;
+  -webkit-mask:
+    radial-gradient(circle var(--r) at 0 50%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--r) at 100% 50%, #0000 98%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--r) at 0 50%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--r) at 100% 50%, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .marquee-rev, .float, .wave-drift, .wave-drift-slow, .hotspot-ring, .spin-slow {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
 }

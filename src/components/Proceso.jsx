@@ -1,58 +1,40 @@
 const steps = [
-  {
-    num: '1',
-    title: 'Mandanos fotos por WhatsApp',
-    desc: 'Nos mostrás el daño y te respondemos en el momento.',
-  },
-  {
-    num: '2',
-    title: 'Traé o enviá el equipo',
-    desc: 'Pasás por el taller en Córdoba o lo mandás desde cualquier punto del país.',
-  },
-  {
-    num: '3',
-    title: 'Reparamos y te avisamos',
-    desc: 'Trabajamos con materiales de primera calidad. Te notificamos cuando está listo.',
-  },
-  {
-    num: '4',
-    title: 'De vuelta al agua',
-    desc: 'Retirás en el taller o te lo mandamos. A disfrutar.',
-  },
+  { title: 'Mandanos fotos', desc: 'Por WhatsApp, mostrándonos el daño. Te respondemos en el momento.' },
+  { title: 'Traé o enviá el equipo', desc: 'Pasás por el taller en Córdoba o lo mandás desde cualquier punto del país.' },
+  { title: 'Reparamos y te avisamos', desc: 'Materiales de primera calidad. Te notificamos cuando está listo.' },
+  { title: 'De vuelta al agua', desc: 'Retirás en el taller o te lo mandamos. A disfrutar.' },
 ]
 
 export default function Proceso() {
   return (
-    <section className="bg-navy px-6 py-16">
-      <p className="mb-1 text-center font-condensed text-xs font-bold uppercase tracking-[3px] text-orange">
-        Cómo funciona
-      </p>
-      <h2 className="mb-10 text-center font-bebas text-4xl tracking-wide text-white">
-        Simple y sin vueltas
-      </h2>
-
-      <div className="mx-auto flex max-w-md flex-col">
-        {steps.map((step, i) => (
-          <div key={step.num} className="flex gap-5 py-5 border-b border-white/6 last:border-0">
-            {/* número + línea conectora */}
-            <div className="flex flex-col items-center">
-              <span className="font-bebas text-4xl leading-none text-orange min-w-[36px] text-center">
-                {step.num}
-              </span>
-              {i < steps.length - 1 && (
-                <div className="mt-1 w-px flex-1 bg-orange/20" />
-              )}
-            </div>
-
-            {/* contenido */}
-            <div className="pb-2 pt-0.5">
-              <h4 className="mb-1 font-condensed text-base font-bold tracking-wide text-white">
-                {step.title}
-              </h4>
-              <p className="text-sm leading-relaxed text-muted">{step.desc}</p>
-            </div>
+    <section id="como" className="grain grain-light relative overflow-hidden bg-ink px-4 py-20 text-paper sm:px-6 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-6 md:grid-cols-[1fr_1fr] md:items-end">
+          <div>
+            <p className="kicker reveal mb-3 text-sun">Cómo funciona</p>
+            <h2 className="reveal font-display text-[clamp(3rem,8vw,5.5rem)] leading-[0.9]">
+              Simple
+              <br />y sin vueltas.
+            </h2>
           </div>
-        ))}
+          <p className="reveal max-w-md text-paper/70 md:justify-self-end">
+            Te pasamos presupuesto y tiempos por WhatsApp antes de tocar nada. Envíos a todo el país con número
+            de seguimiento; en Córdoba podés traerlo al taller.
+          </p>
+        </div>
+
+        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {steps.map((s, i) => (
+            <li key={s.title} className="reveal" style={{ '--d': `${i * 100}ms` }}>
+              <div className="seam mb-5 text-sun/40" />
+              <span className="font-display text-6xl leading-none text-transparent [-webkit-text-stroke:1.5px_#f5a020]">
+                0{i + 1}
+              </span>
+              <h3 className="mt-3 font-condensed text-lg font-bold uppercase tracking-[0.12em]">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-paper/65">{s.desc}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )
