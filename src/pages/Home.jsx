@@ -37,7 +37,7 @@ export default function Home() {
           textClass="font-condensed text-base font-bold uppercase tracking-[0.2em]"
         />
         <Arreglos />
-        <AntesDespues />
+        {/* <AntesDespues /> */}
         <Proceso />
         <Contacto />
       </main>
