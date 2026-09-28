@@ -20,11 +20,10 @@ export default function Taller() {
               <span className="float-left mr-2 mt-1 font-display text-6xl leading-[0.8] text-rust">K</span>
               iterepair nace en Córdoba con una idea fija: que un tajo en la tela no te deje en la orilla.
               Reparamos kites, wings, foils y tablas de cualquier marca, con materiales profesionales
-              (ripstop, dacron, carbono, resinas) y a mano, puntada por puntada.
+              (ripstop, dacron, carbono, resinas), puntada por puntada.
             </p>
             <p>
-              Nada de parches con cinta ni arreglos que duran una sesión. Cada reparación se hace para
-              aguantar el próximo borde, el próximo salto y el próximo revolcón.
+              Respondemos todo tipo de consultas.
             </p>
           </div>
 
